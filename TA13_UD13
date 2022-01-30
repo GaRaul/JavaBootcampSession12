@@ -11,8 +11,8 @@ ACCIDENTE(pk id_accidente, nombre, coor.x, coord.y)
 	LAGO(pk id_accidente, extension)
 	MONTAÑA(pk id_accidente, altitud)
 	RIO(pk id_accidente, longitud)
-ESTA_EN(pk.fk1 nombre, pk.fk2 id_accidente)
 LOCALIDAD(pk id_localidad, nombre)
+ESTA_EN(pk.fk1 nombre, pk.fk2 id_accidente)
 PASA_POR(pk.fk1 id_accidente, pk.fk2 id_localidad)
 
 //EJERCICIO 18_TA12
@@ -22,23 +22,23 @@ PERSONA(pk codigo_persona, DNI, nombre, tlf.fijo, tlf.movil, apellidos)
 TRANSACCION(pk id_transaccion)
 	COMPRA(pk codigo_compra, fk id_transaccion)
 	ALQUILER(pk codigo_alquiler, fk id_transaccion)
-HACE(pk.fk1 codigo, pk.fk2 id_transaccion)
 INMUEBLE(pk codigo_inmueble, metros, descripcion, direccion)
 	PISO(pk codigo_piso, numero, fk codigo_inmueble)
 	GARAJE(pk codigo_garaje, numero, fk codigo_inmueble)
-	LOCAL(pk codigo_local, servicio, uso, fk codigo_inmueble
-REALIZA(pk.fk1 codigo_compra, pk.fk2 codigo_inmueble, pk.fk3 codigo_inmueble, fecha, valor, nombre_agente, nombre_arrendatario)
+	LOCAL(pk codigo_local, servicio, uso, fk codigo_inmueble)
+HACE(pk.fk1 codigo_cliente, pk.fk2 id_transaccion)
+REALIZA(pk.fk1 codigo_compra, pk.fk2 codigo_alquiler, pk.fk3 codigo_inmueble, fecha, valor, nombre_agente, nombre_arrendatario)
 		
 //EJERCICIO 1_TA13
 ATLETA(pk num_dorsal, nombre, fk num_dorsal_atleta2)
 
 //EJERCICIO 2_TA13
 ELEMENTO(pk nombre_elem, peso_atomico, simbolo, num_atomico)
+COMPUESTO_POR(pk.fk1 nombre_elem, pk.fk2 nombre_compuesto, proporcion)
 COMPUESTO(pk nombre_compuesto, estado)
 	GASEOSO(pk nombre_compuesto, coef_expan, temp_lic)
 	LIQUIDO(pk nombre_compuesto, densidad, temp_evap)
 	SOLIDO(pk nombre_compuesto, color, olor, dureza)
-COMPUESTO_POR(pk.fk1 nombre_elem, pk.fk2 nombre_compuesto, proporcion)
 	
 //EJERCICIO 3_TA13
 ABRIR(pk.fk1 num_sucursal, pk.fk2 DNI, pk.fk3 num_cuenta)
@@ -50,13 +50,13 @@ TRANSACCION(pk num_transaccion, fecha, tipo_operacion, cantidad, fk num_cuenta)
 //EJERCICIO 4_TA13
 COCHE(pk num_coche, marca, modelo, num_matricula, fecha_compra, fecha_ult_rev, fk cod_parque)
 PARQUE_BOMBEROS(pk cod_parque, nombre, direccion, telefono, categoria)
-PETICION_SERVICIO(pk cod_pet_serv, tipo_serv, grado_urgencia, fk cod_eq)
 RECIBE(pk.fk1 cod_parque, pk.fk2 cod_pet_serv, fecha, hora)
+PETICION_SERVICIO(pk cod_pet_serv, tipo_serv, grado_urgencia, fk cod_eq)
 EQUIPO(pk cod_eq, nombre)
 BOMBERO(pk cod_bom, nombre, apellidos, fecha_nac, DNI, direccion, telefono, fk cod_parque, fk cod_eq, puesto)
+TRABAJA_ES(pk.fk1 cod_bom, pk.fk2 cod_turno, pk.fk3 fecha_inicio, pk.fk4 fecha_fin)
 TURNO(pk cod_turno, descripcion)
 PERIODO(pk fecha_inicio, pk fecha_fin)
-TRABAJA_ES(pk.fk1 cod_bom, pk.fk2 cod_turno, pk.fk3 fecha_inicio, pk.fk4 fecha_fin)
 
 //EJERCICIO 5_TA13
 FONDO(pk titulo, pk autor, cantidad)
@@ -80,8 +80,8 @@ RECIBO(pk numero_recibo, importe_total, importe_IVA, pagado, fecha, fk codigo_na
 
 //EJERCICIO 8_TA13
 CARGO(pk codigo_cargo, nombre, funciones)
-PISO(pk puerta, DNI, nombre, apellidos, direccion, codigo_postal, localidad, provincia, telefono)
 OSTENTA(pk.fk1 codigo_cargo, pk.fk2 puerta, fecha_posesion)
+PISO(pk puerta, DNI, nombre, apellidos, direccion, codigo_postal, localidad, provincia, telefono)
 ANOTACION(pk codigo_anotacion, fecha, importe )
 	GASTO_VARIABLE(pk codigo_anotacion, fecha_factura, concepto, numero_factura)
 	INGRESO_EXTRA(pk codigo_anotacion, concepto)
